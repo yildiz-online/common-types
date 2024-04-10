@@ -1,0 +1,18 @@
+language: minimal
+
+git:
+  depth: false
+
+os: linux
+
+dist: jammy
+
+cache:
+  directories:
+    - $HOME/.m2
+
+services:
+  - docker
+
+script:
+  - travis_retry docker run --pull=always -v $PWD:/src -v $HOME/.m2:/root/.m2 -e BRANCH=$TRAVIS_BRANCH -e VAULT_TOKEN=$VAULT_TOKEN moussavdb/build-java:21
